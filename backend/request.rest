@@ -1,0 +1,36 @@
+### Get /
+GET http://localhost:3030/
+
+### Get Token
+GET http://localhost:3030/token
+
+### Login 
+POST http://localhost:3030/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password"
+}
+
+### logout
+DELETE http://localhost:3030/logout
+
+### Get all users
+GET http://localhost:3030/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzc1NzE0NTUxLCJleHAiOjE3NzU3MTQ1NzF9.uyWRoUDsGtYuU-bYkxRx4RfQxRQ_N7_Pu6HJZem6LhU
+
+### Get user by id
+GET http://localhost:3030/users/1
+
+
+### Register/Create User
+POST http://localhost:3030/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "test@example.com",
+    "password": "password",
+    "confPassword": "password"
+}
