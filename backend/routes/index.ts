@@ -2,7 +2,7 @@ import express from "express";
 import UserRoutes from "@routes/UserRoutes";
 import { login, logout } from "@controllers/AuthController";
 import { refreshToken } from "@controllers/RefreshTokenController";
-import { loginLimiter } from "@middlewares/loginLimiter";
+import { rateLimiter } from "@/middlewares/rateLimiter";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get("/", (_, res) => {
 });
 
 // Auth Routes
-router.post("/login", loginLimiter, login);
+router.post("/login", rateLimiter, login);
 router.delete("/logout", logout);
 
 // Refresh Token Routes

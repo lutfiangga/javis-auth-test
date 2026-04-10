@@ -17,6 +17,7 @@ export default function AuthForm() {
   const toggleMode = useAuthVisibility((state) => state.toggleMode);
   const setSession = useAuthStore((state) => state.setSession);
   const [msg, setMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
 
   const isLogin = mode === "login";
@@ -27,11 +28,13 @@ export default function AuthForm() {
 
   const register = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setMsg("");
     const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
-      const response = await api.post("/users", {
+      const response = await api.post("/users/register", {
         name: formData.get("name"),
         email: formData.get("email"),
         password: formData.get("password"),
@@ -40,12 +43,16 @@ export default function AuthForm() {
 
       toast.success(response.data.message)
       toggleMode();
+      setIsLoading(false);
     } catch (error: any) {
-      setMsg(error.response.data.message);
+      setMsg(error.response?.data?.message || "Something went wrong.");
+      setIsLoading(false);
     }
   }
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setMsg("");
     const form = e.currentTarget;
     const formData = new FormData(form);
 
@@ -55,13 +62,14 @@ export default function AuthForm() {
         password: formData.get("password"),
       });
       const accessToken = response.data?.data?.accessToken;
-      if (accessToken) {
-        setSession(accessToken);
-      }
+      if (accessToken) setSession(accessToken);
       toast.success(response.data.message)
-      navigate("/dashboard", { replace: true })
+      setTimeout(() => {
+        navigate("/dashboard", { replace: true })
+      }, 8000);
     } catch (error: any) {
       setMsg(error.response?.data?.message || "Network error. Please try again.");
+      setIsLoading(false);
     }
   }
 
@@ -138,7 +146,7 @@ export default function AuthForm() {
         )}
 
         <div className="pt-1">
-          <SubmitButton>{isLogin ? "Sign in" : "Register"}</SubmitButton>
+          <SubmitButton isLoading={isLoading}>{isLogin ? "Sign in" : "Register"}</SubmitButton>
         </div>
       </form>
     </FormCard>
