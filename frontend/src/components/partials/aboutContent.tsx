@@ -30,7 +30,7 @@ const backendStack = [
   "bcrypt",
   "cors",
   "jsonwebtoken",
-  "cookir-parser",
+  "cookie-parser",
   "sequelize",
   "express-rate-limit",
 ];
