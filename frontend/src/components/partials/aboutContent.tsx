@@ -30,7 +30,7 @@ const backendStack = [
   "bcrypt",
   "cors",
   "jsonwebtoken",
-  "cookir-parser (cookie-parser)",
+  "cookir-parser",
   "sequelize",
   "express-rate-limit",
 ];
@@ -123,7 +123,7 @@ export default function AboutContent({ name, initials = "AB" }: AboutContentProp
 DELETE /logout
 GET    /token
 GET    /users      (protected)
-POST   /users      (resgiter)`}
+POST   /users/register      (resgiter)`}
               </pre>
             </div>
           </div>
