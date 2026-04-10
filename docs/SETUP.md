@@ -24,6 +24,7 @@ DB_HOST=localhost
 DB_PORT=3306
 ACCESS_TOKEN_SECRET=your_access_secret
 REFRESH_TOKEN_SECRET=your_refresh_secret
+NODE_ENV=development
 ```
 
 Jalankan backend:
